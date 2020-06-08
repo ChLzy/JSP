@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tsxy.lzy.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.tsxy.lzy.pojo.Student" >
+    <id column="StuId" property="stuid" jdbcType="INTEGER" />
+    <result column="StuName" property="stuname" jdbcType="VARCHAR" />
+    <result column="StuSex" property="stusex" jdbcType="VARCHAR" />
+    <result column="StuPassword" property="stupassword" jdbcType="VARCHAR" />
+    <result column="StuPhoto" property="stuphoto" jdbcType="VARCHAR" />
+    <result column="StuMail" property="stumail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    StuId, StuName, StuSex, StuPassword, StuPhoto, StuMail
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tsxy.lzy.pojo.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where StuId = #{stuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where StuId = #{stuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tsxy.lzy.pojo.StudentExample" >
+    delete from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tsxy.lzy.pojo.Student" >
+    insert into student (StuId, StuName, StuSex, 
+      StuPassword, StuPhoto, StuMail
+      )
+    values (#{stuid,jdbcType=INTEGER}, #{stuname,jdbcType=VARCHAR}, #{stusex,jdbcType=VARCHAR}, 
+      #{stupassword,jdbcType=VARCHAR}, #{stuphoto,jdbcType=VARCHAR}, #{stumail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tsxy.lzy.pojo.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuid != null" >
+        StuId,
+      </if>
+      <if test="stuname != null" >
+        StuName,
+      </if>
+      <if test="stusex != null" >
+        StuSex,
+      </if>
+      <if test="stupassword != null" >
+        StuPassword,
+      </if>
+      <if test="stuphoto != null" >
+        StuPhoto,
+      </if>
+      <if test="stumail != null" >
+        StuMail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuid != null" >
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="stuname != null" >
+        #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="stusex != null" >
+        #{stusex,jdbcType=VARCHAR},
+      </if>
+      <if test="stupassword != null" >
+        #{stupassword,jdbcType=VARCHAR},
+      </if>
+      <if test="stuphoto != null" >
+        #{stuphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="stumail != null" >
+        #{stumail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tsxy.lzy.pojo.StudentExample" resultType="java.lang.Integer" >
+    select count(*) from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update student
+    <set >
+      <if test="record.stuid != null" >
+        StuId = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuname != null" >
+        StuName = #{record.stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stusex != null" >
+        StuSex = #{record.stusex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stupassword != null" >
+        StuPassword = #{record.stupassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuphoto != null" >
+        StuPhoto = #{record.stuphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stumail != null" >
+        StuMail = #{record.stumail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update student
+    set StuId = #{record.stuid,jdbcType=INTEGER},
+      StuName = #{record.stuname,jdbcType=VARCHAR},
+      StuSex = #{record.stusex,jdbcType=VARCHAR},
+      StuPassword = #{record.stupassword,jdbcType=VARCHAR},
+      StuPhoto = #{record.stuphoto,jdbcType=VARCHAR},
+      StuMail = #{record.stumail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tsxy.lzy.pojo.Student" >
+    update student
+    <set >
+      <if test="stuname != null" >
+        StuName = #{stuname,jdbcType=VARCHAR},
+      </if>
+      <if test="stusex != null" >
+        StuSex = #{stusex,jdbcType=VARCHAR},
+      </if>
+      <if test="stupassword != null" >
+        StuPassword = #{stupassword,jdbcType=VARCHAR},
+      </if>
+      <if test="stuphoto != null" >
+        StuPhoto = #{stuphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="stumail != null" >
+        StuMail = #{stumail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where StuId = #{stuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tsxy.lzy.pojo.Student" >
+    update student
+    set StuName = #{stuname,jdbcType=VARCHAR},
+      StuSex = #{stusex,jdbcType=VARCHAR},
+      StuPassword = #{stupassword,jdbcType=VARCHAR},
+      StuPhoto = #{stuphoto,jdbcType=VARCHAR},
+      StuMail = #{stumail,jdbcType=VARCHAR}
+    where StuId = #{stuid,jdbcType=INTEGER}
+  </update>
+</mapper>

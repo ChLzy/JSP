@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///bishe?serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123
+  #thymeleaf 配置
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    #缓存设置为false，修改后马上生效，便于调试
+    check-template: true
+    check-template-location: true
+    enabled: true
+    suffix: .html
+    prefix: classpath:/templates/
+  #分页
+pagehelper:
+  reasonable: true

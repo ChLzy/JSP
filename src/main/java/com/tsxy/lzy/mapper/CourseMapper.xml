@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tsxy.lzy.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.tsxy.lzy.pojo.Course" >
+    <id column="CouId" property="couid" jdbcType="INTEGER" />
+    <result column="CouName" property="couname" jdbcType="VARCHAR" />
+    <result column="CouShow" property="coushow" jdbcType="VARCHAR" />
+    <result column="TeaId" property="teaid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CouId, CouName, CouShow, TeaId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tsxy.lzy.pojo.CourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where CouId = #{couid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course
+    where CouId = #{couid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tsxy.lzy.pojo.CourseExample" >
+    delete from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tsxy.lzy.pojo.Course" >
+    insert into course (CouId, CouName, CouShow, 
+      TeaId)
+    values (#{couid,jdbcType=INTEGER}, #{couname,jdbcType=VARCHAR}, #{coushow,jdbcType=VARCHAR}, 
+      #{teaid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tsxy.lzy.pojo.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="couid != null" >
+        CouId,
+      </if>
+      <if test="couname != null" >
+        CouName,
+      </if>
+      <if test="coushow != null" >
+        CouShow,
+      </if>
+      <if test="teaid != null" >
+        TeaId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="couid != null" >
+        #{couid,jdbcType=INTEGER},
+      </if>
+      <if test="couname != null" >
+        #{couname,jdbcType=VARCHAR},
+      </if>
+      <if test="coushow != null" >
+        #{coushow,jdbcType=VARCHAR},
+      </if>
+      <if test="teaid != null" >
+        #{teaid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tsxy.lzy.pojo.CourseExample" resultType="java.lang.Integer" >
+    select count(*) from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course
+    <set >
+      <if test="record.couid != null" >
+        CouId = #{record.couid,jdbcType=INTEGER},
+      </if>
+      <if test="record.couname != null" >
+        CouName = #{record.couname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coushow != null" >
+        CouShow = #{record.coushow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaid != null" >
+        TeaId = #{record.teaid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course
+    set CouId = #{record.couid,jdbcType=INTEGER},
+      CouName = #{record.couname,jdbcType=VARCHAR},
+      CouShow = #{record.coushow,jdbcType=VARCHAR},
+      TeaId = #{record.teaid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tsxy.lzy.pojo.Course" >
+    update course
+    <set >
+      <if test="couname != null" >
+        CouName = #{couname,jdbcType=VARCHAR},
+      </if>
+      <if test="coushow != null" >
+        CouShow = #{coushow,jdbcType=VARCHAR},
+      </if>
+      <if test="teaid != null" >
+        TeaId = #{teaid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where CouId = #{couid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tsxy.lzy.pojo.Course" >
+    update course
+    set CouName = #{couname,jdbcType=VARCHAR},
+      CouShow = #{coushow,jdbcType=VARCHAR},
+      TeaId = #{teaid,jdbcType=INTEGER}
+    where CouId = #{couid,jdbcType=INTEGER}
+  </update>
+</mapper>

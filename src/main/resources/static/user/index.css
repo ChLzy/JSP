@@ -1,0 +1,184 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+/*第一行布局*/
+.first-line {
+    display: inline;
+    margin-top: 30px;
+}
+
+.logo {
+    padding-left: 50px;
+    width: 250px;
+    hight: 58px;
+}
+
+.search {
+    position: absolute;
+    font-size: 18px;
+    margin-left: 250px;
+    margin-top: 50px;
+    /*border: 1px solid #0C0C0C;*/
+    border-radius: 20px;
+}
+
+.layui-nav {
+    padding-left: 130px;
+}
+
+.sc-btn {
+    font-size: 24px;
+}
+
+.first-line-third {
+    line-height: 32px;
+    margin: 30px 40px 0px 630px;
+    position: absolute;
+    text-align: left;
+}
+
+/*第二行布局*/
+.second-line-one {
+    position: relative;
+    z-index: 2000;
+}
+.second-line a{
+
+    cursor:pointer;
+
+}
+#div-nav {
+    width: 100%;
+    height: 20px;
+}
+
+/*一级菜单*/
+#div-blogs {
+    cursor: default;
+    width: 70px;
+}
+
+.menu-1 {
+    margin-left: 40px;
+
+}
+
+.menu-1 > i {
+    font-size: 20px;
+}
+
+.menu-1:hover > i {
+    color: #00CC00;
+}
+
+/*二级菜单*/
+#div-blogs-1 {
+    position: absolute;
+    z-index: 1500;
+    margin-left: 0px;
+    display: none;
+    height: 280px;
+    background: #ffffff;
+    box-shadow: 1px 1px 0px 1px #DCDCDC inset;
+    border-radius: 8px 0px 0px 8px;
+    border-right: 0px;
+    opacity: 0.9;
+}
+
+.menu-2 {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    /*box-shadow:0px 0px 0px 0px #DCDCDC ;*/
+    font-size: 20px;
+}
+
+.menu-2:hover {
+    background: #c0a16b;
+
+}
+
+/*三级菜单*/
+#div-myblogs-1 {
+    width: 400px; /*三级菜单的宽*/
+    height: 280px; /*三级菜单的高*/
+    background: #ffffff;
+    position: relative;
+    left: 100px;
+    top: -27px;
+    display: none;
+    box-shadow: 0px 2px 1px 0px #DCDCDC inset;
+    border-radius: 0px 8px 8px 0;
+}
+
+#div-myblogs-2 {
+    width: 400px; /*三级菜单的宽*/
+    height: 280px; /*三级菜单的高*/
+    background: #ffffff;
+    position: relative;
+    left: 100px;
+    top: -57px;
+    display: none;
+    box-shadow: 0px 2px 1px 0px #DCDCDC inset;
+    border-radius: 0px 8px 8px 0;
+}
+
+.menu-3 {
+    width: 100px;
+    height: 30px;
+    border-left: 0px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#div-blogs:hover #div-blogs-1 {
+    display: block;
+}
+
+#div-blogs:hover #div-blogs-2 {
+    display: block;
+}
+
+#div-myblogs:hover #div-myblogs-1 {
+    display: block;
+}
+
+#div-myblogs2:hover #div-myblogs-2 {
+    display: block;
+}
+
+.menu-3:hover {
+
+}
+
+/*第三行布局*/
+.third-line {
+    text-align: center;
+    margin-top: 90px;
+    overflow: hidden;
+    height: 1900px;
+}
+
+.third-line span {
+
+    margin-right: 10px;
+    font-size: 26px;
+}
+
+.third-line img {
+    margin-top: 20px;
+    cursor: pointer; /*鼠标变化*/
+    transition: all 0.6s; /*图片变化在0.6s*/
+    margin-left: 40px;
+    width: 180px;
+    height: 120px;
+    overflow: hidden;
+    z-index: 500;
+}
+
+.third-line img:hover {
+    transform: scale(1.1); /*图片比例放大1.1倍*/
+}
+/*返回顶部*/

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tsxy.lzy.mapper.AdminMapper">
+    <resultMap id="BaseResultMap" type="com.tsxy.lzy.pojo.Admin">
+        <id column="AdId" property="adid" jdbcType="INTEGER"/>
+        <result column="AdName" property="adname" jdbcType="VARCHAR"/>
+        <result column="adpassword" property="adpassword" jdbcType="VARCHAR"/>
+        <result column="AdPhone" property="adphone" jdbcType="VARCHAR"/>
+        <result column="AdMail" property="admail" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        AdId, AdName, adpassword, AdPhone, AdMail
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tsxy.lzy.pojo.AdminExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from admin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from admin
+        where AdId = #{adid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from admin
+        where AdId = #{adid,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.tsxy.lzy.pojo.AdminExample">
+        delete from admin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.tsxy.lzy.pojo.Admin">
+        insert into admin (AdId, AdName, adpassword,
+        AdPhone, AdMail)
+        values (#{adid,jdbcType=INTEGER}, #{adname,jdbcType=VARCHAR}, #{adpassword,jdbcType=VARCHAR},
+        #{adphone,jdbcType=VARCHAR}, #{admail,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.tsxy.lzy.pojo.Admin">
+        insert into admin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="adid != null">
+                AdId,
+            </if>
+            <if test="adname != null">
+                AdName,
+            </if>
+            <if test="adpassword != null">
+                adpassword,
+            </if>
+            <if test="adphone != null">
+                AdPhone,
+            </if>
+            <if test="admail != null">
+                AdMail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="adid != null">
+                #{adid,jdbcType=INTEGER},
+            </if>
+            <if test="adname != null">
+                #{adname,jdbcType=VARCHAR},
+            </if>
+            <if test="adpassword != null">
+                #{adpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="adphone != null">
+                #{adphone,jdbcType=VARCHAR},
+            </if>
+            <if test="admail != null">
+                #{admail,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.tsxy.lzy.pojo.AdminExample" resultType="java.lang.Integer">
+        select count(*) from admin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update admin
+        <set>
+            <if test="record.adid != null">
+                AdId = #{record.adid,jdbcType=INTEGER},
+            </if>
+            <if test="record.adname != null">
+                AdName = #{record.adname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.adpassword != null">
+                adpassword = #{record.adpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="record.adphone != null">
+                AdPhone = #{record.adphone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.admail != null">
+                AdMail = #{record.admail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update admin
+        set AdId = #{record.adid,jdbcType=INTEGER},
+        AdName = #{record.adname,jdbcType=VARCHAR},
+        adpassword = #{record.adpassword,jdbcType=VARCHAR},
+        AdPhone = #{record.adphone,jdbcType=VARCHAR},
+        AdMail = #{record.admail,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.tsxy.lzy.pojo.Admin">
+        update admin
+        <set>
+            <if test="adname != null">
+                AdName = #{adname,jdbcType=VARCHAR},
+            </if>
+            <if test="adpassword != null">
+                adpassword = #{adpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="adphone != null">
+                AdPhone = #{adphone,jdbcType=VARCHAR},
+            </if>
+            <if test="admail != null">
+                AdMail = #{admail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where AdId = #{adid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.tsxy.lzy.pojo.Admin">
+        update admin
+        set AdName = #{adname,jdbcType=VARCHAR},
+        adpassword = #{adpassword,jdbcType=VARCHAR},
+        AdPhone = #{adphone,jdbcType=VARCHAR},
+        AdMail = #{admail,jdbcType=VARCHAR}
+        where AdId = #{adid,jdbcType=INTEGER}
+    </update>
+</mapper>

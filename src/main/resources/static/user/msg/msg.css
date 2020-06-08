@@ -1,0 +1,79 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: url("../../images/shu.jpg");
+}
+
+.first {
+
+    height: 100px;
+    background: #0f0f0f;
+}
+
+.first img {
+    float: left;
+    margin-top: 15px;
+    margin-left: 50px;
+    width: 220px;
+    height: 70px;
+
+}
+
+.first-two {
+    padding-top: 30px;
+}
+
+.first-two a {
+
+    font-size: 30px;
+    color: white;
+}
+
+.a-one {
+    margin-right: 20px;
+    margin-left: 900px;
+}
+
+.second {
+    background: white;
+    margin-left: 450px;
+    margin-top: 30px;
+    width: 800px;
+    height: 400px;
+    border: 1px solid #cccccc;
+
+
+}
+
+.second p {
+    color: #cccccc;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.second img {
+    width: 100px;
+    height: 100px;
+}
+
+footer {
+    background: #0C0C0C;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+footer p1{
+
+    font-size: 30px;
+}
+footer p2{
+
+}

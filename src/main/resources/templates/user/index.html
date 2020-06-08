@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="toTop" content="true">
+
+    <title>JSP程序设计课程教学平台</title>
+    <link rel="stylesheet" th:href="@{../../static/layui-v2.5.6/css/layui.css}">
+    <link rel="stylesheet" th:href="@{../../static/bootstrap-3.3.7/dist/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{../../static/user/index.css}">
+    <link rel="stylesheet" th:href="@{../../static/user/popup.css}">
+    <script type="text/javascript" th:src="@{http://www.jq22.com/jquery/1.8.3/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{../../static/layui-v2.5.6/layui.js}"></script>
+    <script type="text/javascript" th:src="@{../../static/user/kefu.js}"></script>
+    <script type="text/javascript" th:src="@{../../static/user/toTop.js}"></script>
+    <script type="text/javascript" th:src="@{../../static/user/popup.js}"></script>
+</head>
+<body onload="myNotice()">
+
+<div class="first-line">
+    <img class="logo first-line" th:src="@{../../static/images/logoNEw.jpg}" style="width: 300px;height: 100px">
+    <div class="search first-line">
+        <form class="form-inline" action="#">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">课程</div>
+                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入关键词">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">查询</button>
+        </form>
+    </div>
+    <div class="first-line-third first-line">
+        <ul class="layui-nav">
+            <li class="layui-nav-item">
+                <a th:href="@{/user/myStudy}">我的学习<span class="layui-badge-dot"></span></a>
+            </li>
+            <li class="layui-nav-item" lay-unselect="">
+                <a th:href="@{/user/myMsg}" th:if="${session.sp!=null}" th:text="${session.sp.getName()}">
+                    <img th:src="@{${session.sp.getPhoto()}}"
+                                            class="layui-nav-img">
+                </a>
+                <a th:href="@{/user/login}" th:if="${session.sp==null}" th:text="登录">
+                    <img th:src="@{../../static/images/nickname.png}" class="layui-nav-img">
+                </a>
+
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/user/out}">退了</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="second-line">
+    <div class="second-line-one">
+        <div class="menu-1" id="div-blogs"><i class="layui-icon">课程&#xe61a</i>
+            <!--二级菜单-->
+            <div id="div-blogs-1">
+                <div class="menu-2" id="div-myblogs">
+                    1
+                    <!--三级菜单-->
+                    <div id="div-myblogs-1" class="layui-nav-item">
+                        <div class="menu-3" id="div-origin"><a>1-1</a></div>
+                        <div class="menu-3" id="div-reprint"><a>1-2</a></div>
+                    </div>
+                </div>
+                <div class="menu-2" id="div-myblogs2">
+                    2
+                    <!--三级菜单-->
+                    <div id="div-myblogs-2" class="layui-nav-item">
+                        <div class="menu-3" id="div-origin2"><a>2-1</a></div>
+                        <div class="menu-3" id="div-reprint2"><a>2-2</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-carousel" id="test1" >
+        <div carousel-item style="width: 100%;height: 360px">
+            <div><img th:src="@{../../static/images/lb1.jpg}" style="width: 100%;height: 504px"/></div>
+            <div><img th:src="@{../../static/images/lb2.jpg}" style="width: 100%;height: 504px"/></div>
+            <div style="background: #00CCFF">条目3</div>
+            <!--<div>条目4</div>
+            <div>条目5</div>-->
+        </div>
+    </div>
+</div>
+<div class="third-line">
+    <div>
+        <span>高中好课畅学</span>
+    </div>
+    <a target="_blank" th:href="@{/user/toCourse}">
+        <img th:src="@{../../static/images/third-line1.png}">
+    </a>
+    <a target="_blank" th:href="@{//www.baidu.com}">
+        <img th:src="@{../../static/images/third-line1.png}">
+    </a>
+    <a target="_blank" th:href="@{//www.baidu.com}">
+        <img th:src="@{../../static/images/third-line1.png}">
+    </a>
+    <a target="_blank" th:href="@{//www.baidu.com}">
+        <img th:src="@{../../static/images/third-line1.png}">
+    </a>
+    <a target="_blank" th:href="@{//www.baidu.com}">
+        <img th:src="@{../../static/images/third-line1.png}">
+    </a>
+    <a target="_blank" th:href="@{//www.baidu.com}">
+        <img th:src="@{../../static/images/third-line1.png}">
+    </a>
+
+</div>
+<div class="fourth-line">
+    <button id="alertBtn">alert弹窗</button>
+</div>
+<script>
+    layui.use(['element', 'carousel'], function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        //监听导航点击
+        element.on('nav(demo)', function (elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            , width: '100%' //设置容器宽度
+            , arrow: 'hover' //始终显示箭头
+            , interval: '2000'//切换速度
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+</script>
+<script>
+    var kefu = new Kefu({
+        index: "/",
+        tel: "13888888888",//电话号码
+        qq: "1308505277",//在线QQ
+        wechatPerson: {
+            state: true,// true是开启个人微信二维码, false不开启
+            imgURL: "./imgs/2wm.png" //图片路径
+        },
+        wechatofficial: {
+            state: true,// true是开启微信公众号二维码, false不开启
+            imgURL: "./imgs/2wm.png" //图片路径
+        }//微信公众号
+    });
+</script>
+<script>
+    var Popup = new Popup();
+    var alertBtn = document.getElementById('alertBtn');
+    function myNotice() {
+        $.ajax({
+            type:"Post",
+            url:"/data/show",
+            data:"",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data) {
+                   Popup.alert(data[0],data[1]);
+
+
+            },
+        });
+
+    }
+</script>
+</body>
+</html>
